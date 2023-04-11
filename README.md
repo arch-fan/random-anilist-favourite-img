@@ -1,2 +1,2 @@
-# Random image of my anilist profile
+# Random image of anilist profile
 If you want to use it, just clone the repo and set your secrets specified on the .github/workflows/main.yml. Then take the generated image's url and paste it on your profile readme
