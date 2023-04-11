@@ -24,4 +24,4 @@ jobs:
           git config user.email ${{ secrets.GIT_MAIL }}
           git add .
           git commit -am "Changing the images"
-          git push -f https://${{ secrets.GH_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git
+          git push -f https://${{ secrets.UPDATE_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git
