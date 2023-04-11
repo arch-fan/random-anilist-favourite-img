@@ -1,0 +1,27 @@
+name: Save images from AniList
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  save_images:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+    - name: Save images
+      run: python main.py ${{ secrets.ANILIST_ID }}
+    - name: Commit images
+      run: |
+          git config user.name arch-fan
+          git config user.email ${{ secrets.GIT_MAIL }}
+          git add .
+          git commit -am "Changing the images"
+          git push -f https://${{ secrets.GH_TOKEN }}@github.com//arch-fan/random-anime-fav-img.git
