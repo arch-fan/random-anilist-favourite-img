@@ -24,4 +24,4 @@ jobs:
           git config user.email ${{ secrets.GIT_MAIL }}
           git add .
           git commit -am "Changing the images"
-          git push -f https://${{ secrets.GH_TOKEN }}@github.com//arch-fan/random-anilist-favourite-img.git
+          git push -f https://${{ secrets.GH_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git
