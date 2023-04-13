@@ -8,9 +8,10 @@ img_folder_path = os.path.join(os.getcwd(), "images")
 query = '''
 query ($id: Int) {
     User (id: $id) {
-        favourites(page: 1) {
+        favourites {
             anime {
                 nodes {
+                    siteUrl
                     coverImage {
                         large
                     }
@@ -18,6 +19,7 @@ query ($id: Int) {
             }
             manga {
                 nodes {
+                    siteUrl
                     coverImage {
                         large
                     }
@@ -25,6 +27,7 @@ query ($id: Int) {
             }
             characters {
                 nodes {
+                    siteUrl
                     image {
                         large
                     }
@@ -32,6 +35,7 @@ query ($id: Int) {
             }
             staff {
                 nodes {
+                    siteUrl
                     image {
                         large
                     }
@@ -60,11 +64,19 @@ for i in user_favourites:
 
     if(i == "anime" or i == "manga"):
         image_url = usfavnodes[int(num)]['coverImage']['large']
+        source_url = usfavnodes[int(num)]['siteUrl']
     else:
         image_url = usfavnodes[int(num)]['image']['large']
+        source_url = usfavnodes[int(num)]['siteUrl']
 
     image_file_name = f"{i}.jpg"
+    links_file_name = f"{i}.txt"
     image_file_path = os.path.join(img_folder_path, image_file_name)
+    links_file_path = os.path.join(img_folder_path, links_file_name)
+
     with open(image_file_path, 'wb') as f:
         response = requests.get(image_url)
         f.write(response.content)
+
+    with open(links_file_path, 'w') as u:
+        u.write(source_url)
